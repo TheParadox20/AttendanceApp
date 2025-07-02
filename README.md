@@ -77,6 +77,29 @@ When you want to forcefully reload, for example to reset the state of your app, 
 
 You've successfully run and modified your React Native App. :partying_face:
 
+## Step 5: Bundle your app
+
+`npx react-native build-android --mode=release`
+
+locate the file in 
+
+`projectfolder\android\app\build\outputs\bundle\release`
+
+Download and install bundletool from the [official github page](https://github.com/google/bundletool/releases)
+
+`java -jar ./bundletool.jar build-apks --bundle=C:\projects\AttendanceApp\android\app\build\outputs\bundle\release\app-release.aab --output=./app.apks --mode=universal`
+
+Parameters:
+- bundle: Path to your AAB file.
+- output: Output file (.apks archive containing APKs).
+- mode=universal: Generates a single APK with all architectures and resources.
+
+If the bundle is signed, include signing details
+
+`java -jar .\bundletool.jar build-apks --bundle=\app-release.aab --output=\app.apks --mode=universal --ks=projectfolder\android\app\my-release-key.jks --ks-pass=pass:your-store-password --ks-key-alias=my-alias --key-pass=pass:your-key-password`
+
+[React Native Docs](https://reactnative.dev/docs/signed-apk-android) - learn more about building and signing apks.
+
 ### Now what?
 
 - If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
